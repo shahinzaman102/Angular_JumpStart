@@ -1,0 +1,21 @@
+<h2>Built-In Pipes</h2>
+
+<!-- Pure pipes: DatePipe, DecimalPipe, PercentPipe, CurrencyPipe, UpperCasePipe, LowerCasePipe, KeyValuePipe, 
+and JsonPipe are all pure pipes because they do not have any side effects and their output only depends on their input parameters. -->
+<p>DatePipe: {{ today | date }}</p>
+<p>DecimalPipe: {{ pi | number:'1.2-3' }}</p>
+<p>PercentPipe: {{ rate | percent }}</p>
+<p>CurrencyPipe: {{ price | currency:'USD':'symbol':'1.2-2' }}</p>
+<p>UpperCasePipe: {{ message | uppercase }}</p>
+<p>LowerCasePipe: {{ message | lowercase }}</p>
+<p>KeyValuePipe: {{ user | keyvalue | json }}</p>
+<p>JsonPipe: {{ user | json }}</p>
+<!-- Impure pipe: AsyncPipe is an impure pipe because it has side effects (i.e., it subscribes to an observable) 
+and its output can change over time depending on the state of the observable. -->
+<h4>AsyncPipe: {{ message$ | async }}</h4>
+<button type="button" (click)="resend()">Resend</button>
+<div class="spacer-4"></div>
+
+<a routerLink="/custom-pipe" class="router-link">
+    custom-pipe
+</a>

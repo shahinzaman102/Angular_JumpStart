@@ -1,0 +1,15 @@
+<h3 class="title">
+  Child Component: Use Case 3 - Event Bus
+</h3>
+
+<div *ngIf="loggedIn; else loggedOut">
+  Logged in!
+  <button (click)="logout()">Log Out</button>
+</div>
+
+<ng-template #loggedOut>
+  Not logged in
+</ng-template>
+
+<!-- ng-template: defines a reusable template block, often used with *ngIf or *ngFor for conditional or dynamic content. -->
+<!-- # (Template reference variable): allows referencing a template element in the component for logic or passing to other components. -->

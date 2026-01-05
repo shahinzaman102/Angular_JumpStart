@@ -1,0 +1,32 @@
+<table class="routes-table">
+  <thead>
+    <tr>
+      <th class="routes-header">Title</th>
+      <th class="routes-header">Link</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let route of routes">
+      <td *ngIf="route.path" class="routes-cell">
+        <!-- Title as plain text -->
+        <div class="route-title">
+          {{ formatTitle(route.path) }}
+        </div>
+
+        <!-- Description displayed as bullet points -->
+        <ul class="description-list">
+          <li *ngFor="let line of splitDescription(route.path)">
+            {{ line }}
+          </li>
+        </ul>
+      </td>
+
+      <td *ngIf="route.path" class="routes-cell">
+        <a (click)="openLinkInNewTab(route.path)" class="route-link">
+          {{ formatTitle(route.path) }}
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>

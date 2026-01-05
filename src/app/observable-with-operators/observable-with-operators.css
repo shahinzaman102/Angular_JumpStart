@@ -1,0 +1,16 @@
+h1 {
+  margin-bottom: 50px;
+}
+
+.section-title {
+  color: crimson;
+}
+
+.subsection-spacing {
+  margin-top: 35px;
+}
+
+a.router-link {
+  font-weight: bold;
+  font-size: larger;
+}

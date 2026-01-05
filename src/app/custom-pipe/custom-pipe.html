@@ -1,0 +1,19 @@
+<h1>Custom Pipes - Use Cases</h1>
+
+<h3>Heroes Who Can Fly</h3>
+<ul>
+  <li *ngFor="let hero of ((heroes$ | async) ?? [] | canFly:true)">
+  <!-- Ensures that if heroes$ | async is null or undefined, Angular will fall back to an empty array [] -->
+    {{ hero.name | capitalize }}
+  </li>
+</ul>
+
+<p>
+  Total Flying Heroes:
+  {{ ((heroes$ | async) ?? [] | canFly:true | heroCount) }}
+</p>
+
+<hr>
+
+<h3>All Heroes (Raw JSON)</h3>
+<pre>{{ (heroes$ | async) | json }}</pre>

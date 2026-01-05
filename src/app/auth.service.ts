@@ -5,21 +5,18 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
+  // BehaviorSubject acts as an event bus for login status
   private loginStatus = new BehaviorSubject<boolean>(false);
-  // This `BehaviorSubject` acts as an event bus that emits events whenever the login status is updated using the `setLoginStatus()` method.
-  // The `ChildBehaviorSubjectUseCaseThreeComponent` component subscribes to this event bus using the `getLoginStatus()` method 
-  // of the `AuthService` class, and updates its `loggedIn` property whenever an event is emitted.
-  // So, any changes to the login status made in the `login()` method of the `BehaviorSubjectUseCasesComponent` class will be communicated 
-  // to the `ChildBehaviorSubjectUseCaseThreeComponent` component through the `AuthService` event bus.
 
   constructor() { }
 
+  // Update login status and emit to subscribers
   setLoginStatus(status: boolean) {
     this.loginStatus.next(status);
   }
 
+  // Return login status as an Observable for real-time updates
   getLoginStatus() {
     return this.loginStatus.asObservable();
   }
-
 }

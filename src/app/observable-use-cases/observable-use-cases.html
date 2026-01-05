@@ -1,0 +1,28 @@
+<h1>Observable Use Cases</h1>
+<div class="spacer-1"></div>
+
+<h2 class="section-title">Asynchronous data handling & Data transformation</h2>
+
+<div *ngIf="isLoading">Loading...</div>
+
+<ul>
+  <li *ngFor="let item of items$ | async">{{ item }}</li>
+</ul>
+
+<button (click)="fetchData()">Fetch Data</button>
+<button (click)="cancelRequest()" [disabled]='!isLoading'>Cancel Request</button>
+<div class="spacer-3"></div>
+
+<h2 class="section-title">Event handling & Reactive programming</h2>
+
+<button (click)="startEvents()">Start Events</button>
+<button (click)="stopEvents()" [disabled]="!eventsStarted">Stop Events</button>
+
+<ul>
+  <li *ngFor="let event of events$ | async">{{ event }}</li>
+</ul>
+<div class="spacer-2"></div>
+
+<a routerLink="/observable-with-operators" class="router-link">
+  observable-with-operators
+</a>

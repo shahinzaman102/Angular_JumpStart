@@ -1,0 +1,51 @@
+/* Table layout */
+.routes-table {
+  width: 100%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+/* Headers */
+.routes-header {
+  border: 2px solid crimson;
+  padding: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: crimson;
+  background-color: transparent;
+  width: 50%;
+}
+
+/* Cells */
+.routes-cell {
+  border: 1px solid crimson;
+  padding: 10px;
+  width: 50%;
+  white-space: normal;
+}
+
+/* Route title text */
+.route-title {
+  font-size: 1.25rem;
+}
+
+/* Description list */
+.description-list {
+  padding-left: 20px;
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: grey;
+}
+
+/* Links */
+.route-link {
+  font-size: 1.25rem;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.route-link:hover {
+  color: crimson;
+}

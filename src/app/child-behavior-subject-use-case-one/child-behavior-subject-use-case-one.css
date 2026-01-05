@@ -1,0 +1,19 @@
+.container {
+  border: 1px solid crimson;
+}
+
+.gray-text {
+  color: gray;
+}
+
+.title {
+  margin-top: 0;
+}
+
+.note-large {
+  margin-bottom: 45px;
+}
+
+.note-small {
+  margin-bottom: 0;
+}

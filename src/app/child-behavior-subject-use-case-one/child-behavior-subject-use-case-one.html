@@ -1,0 +1,20 @@
+<div class="container">
+  <h3 class="gray-text title">
+    Child Component: Sharing state across components
+  </h3>
+
+  <!-- Current State (not reactive) -->
+  <p class="gray-text">Current State 🡪 {{ currentSate }}</p>
+  <p class="gray-text note-large">
+    Note: This Current State won't update in real-time
+  </p>
+  <!-- Explanation: currentSate isn't subscribed to an Observable, so it won't receive live updates.
+       It only updates when the parent component is recreated (e.g., via route navigation). -->
+
+  <!-- Shared State (reactive) -->
+  <p>Shared State 🡪 {{ message }}</p>
+  <p class="gray-text note-small">
+    Note: This Shared State updates in real-time
+  </p>
+  <!-- Explanation: message is subscribed to a BehaviorSubject Observable, so it updates immediately when the shared state changes. -->
+</div>

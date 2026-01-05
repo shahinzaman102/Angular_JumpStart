@@ -1,0 +1,66 @@
+<h2>BehaviorSubject Use Cases</h2>
+
+<!-- Use Case 1: Sharing state across components -->
+<h3>Sharing state across components 🡪 </h3>
+<input type="text" [(ngModel)]="message"> 
+<button (click)="shareState()">Share State to Child</button>
+<div class="spacer-2"></div>
+  <app-child-behavior-subject-use-case-one></app-child-behavior-subject-use-case-one>
+<div class="spacer-2"></div>
+
+<!-- Use Case 2: Caching -->
+<h3>Caching 🡪 </h3>
+<button (click)="fetchData()">Fetch Data</button>
+<button (click)="getCachedData()">Get Cached Data in the console</button>
+<p *ngIf="getCacheClicked" class="success">
+  ✅ Cached data has been logged to the browser console.
+</p>
+<p>Data: {{ cachedData$ | async | json }}</p>
+<p *ngIf="(cachedData$ | async)?.length === 0">No data available</p>
+<div class="bordered">
+  <app-child-behavior-subject-use-case-two *ngIf="(cachedData$ | async)?.length > 0"
+    [products]="cachedData$ | async"></app-child-behavior-subject-use-case-two>
+</div>
+<div class="spacer-2"></div>
+
+<!-- Use Case 3: Event Bus -->
+<h3>Event Bus 🡪 </h3>
+<button (click)="login()">Log In</button>
+<div class="spacer-2"></div>
+<div class="bordered">
+  <app-child-behavior-subject-use-case-three></app-child-behavior-subject-use-case-three>
+</div>
+<div class="spacer-2"></div>
+
+<!-- Use Case 4: User Input -->
+<h3>User Input 🡪 </h3>
+<input type="text" #input1 (input)="updateInput(input1.value)">
+<h4>Input: {{inputValue}}</h4>
+<div class="spacer-1"></div>
+
+<!-- Use Case 5: Real-time Updates -->
+<h3>Real-time Updates 🡪 </h3>
+<h4>Chat Room: </h4>
+<ul>
+  <li *ngFor="let message of messages$ | async">{{message}}</li>
+</ul>
+<input type="text" #input2 (input)="sendMessage(input2.value)">
+<div class="spacer-3"></div>
+
+<a routerLink="/signal-use-cases" class="router-link">
+  signal-use-cases
+</a>
+
+<!--
+ngModel:
+--------
+`ngModel` provides two-way data binding between a template form control (input, select, etc.) and a component property.
+Example: <input [(ngModel)]="myProperty">
+Changes in the input update the property, and changes in the property update the input.
+Requires importing FormsModule from @angular/forms.
+
+Structural vs Attribute Directives:
+-----------------------------------
+- Structural directives (*ngIf, *ngFor, *ngSwitch) change the DOM structure (add/remove elements).
+- Attribute directives (ngClass, ngStyle, ngModel) modify element behavior or appearance.
+-->

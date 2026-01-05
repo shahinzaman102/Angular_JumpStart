@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Reusable vertical spacing class, equivalent to three <br> */
+.spacer-1 {
+  height: 1em;
+  display: block;
+}
+.spacer-2 {
+  height: 2em;
+  display: block;
+}
+.spacer-3 {
+  height: 3em;
+  display: block;
+}
+.spacer-4 {
+  height: 4em;
+  display: block;
+}

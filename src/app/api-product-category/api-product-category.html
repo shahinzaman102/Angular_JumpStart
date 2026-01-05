@@ -1,0 +1,25 @@
+<div>
+  <h1>{{ title }}</h1>
+  <div>
+    <h2>Categories: (click on the list 🡪 )</h2>
+    <ul>
+      <li *ngFor="let category of categories" (click)="onCategorySelected(category)">
+        {{ category }}
+      </li>
+    </ul>
+  </div>
+  <div>
+    <h2>Selected Category: {{ selectedCategory }}</h2>
+    <h2>Products:</h2>
+    <ul>
+      <li *ngFor="let product of products$ | async">
+        {{ product.title }}
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="spacer-2"></div>
+
+<a routerLink="/observable-use-cases" class="router-link">
+  observable-use-cases
+</a>

@@ -1,0 +1,14 @@
+<h3 class="title">
+  Child Component to Demonstrate the Use Case-2: Caching
+</h3>
+
+<h3>
+  Product List: [Used & Displayed from the Cached data which is resides inside of the instance of the ParentComponent
+  stored in the browser cache (BehaviorSubjectUseCasesComponent)]
+</h3>
+
+<ul>
+  <li *ngFor="let product of products">
+    {{ product.title }}
+  </li>
+</ul>

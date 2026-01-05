@@ -1,0 +1,17 @@
+<h2>Signal Use Cases</h2>
+<div class="spacer-1"></div>
+
+<!-- Use Case 1: Reactive UI state -->
+<h4>Count: {{ count() }}</h4>
+
+<!-- Use Case 2: Derived value auto-updates -->
+<h4>Double Count: {{ doubleCount() }}</h4>
+
+<button (click)="increment()">+</button>
+<button (click)="decrement()">-</button>
+
+<div class="spacer-3"></div>
+
+<a routerLink="/builtin-pipes" class="router-link">
+  builtin-pipes
+</a>

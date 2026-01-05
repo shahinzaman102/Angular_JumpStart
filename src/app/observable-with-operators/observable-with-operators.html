@@ -1,0 +1,41 @@
+<h1>{{ title }}</h1>
+
+<!-- Subscribe to the greeting$ Observable and display the result -->
+<h3 class="section-title">
+  {{ greeting$ | async }}
+</h3>
+
+<!-- Subscribe to the items$ Observable and display the results in a list -->
+<ul>
+  <li *ngFor="let item of items$ | async">
+    {{ item.name }} : {{ item.description }}
+  </li>
+</ul>
+<!-- async pipe automatically subscribes and unsubscribes for us -->
+
+<h3 class="subsection-spacing">
+  Type in the input field - UI will show you the Last Key Pressed:
+</h3>
+
+<p>Last key pressed: {{ lastKeyPressed }}</p>
+
+<input type="text" (keydown)="updateLastKeyPressed($event)" />
+<!-- Angular replaces $event (reserved template variable) at runtime with the real event object -->
+
+<div class="spacer-2"></div>
+
+<h3>
+  Click on the Button / click on outside of the Button of the UI(document) - Browser console will show you the Emitted event 🡪
+</h3>
+
+<h3>
+  Button (click) will create a new Observable which will collect all the lastKeyPressed in the input field and will update the UI:
+</h3>
+
+<button id="myButton">Click me!</button>
+
+<div class="spacer-3"></div>
+
+<a routerLink="/behavior-subject-use-cases" class="router-link">
+  behavior-subject-use-cases
+</a>

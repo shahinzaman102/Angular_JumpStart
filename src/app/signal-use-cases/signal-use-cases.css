@@ -1,0 +1,8 @@
+button {
+  margin-right: 10px;
+}
+
+a.router-link {
+  font-weight: bold;
+  font-size: larger;
+}

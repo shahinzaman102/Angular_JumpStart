@@ -1,0 +1,52 @@
+<!-- Built-in JavaScript Functions -->
+<h2>Built-in JavaScript Functions</h2>
+
+<h3>String Functions</h3>
+<p>String: {{ str }}</p>
+<p>Character at index 2: {{ str.charAt(2) }}</p>
+<p>Concatenated string: {{ str.concat(' World!') }}</p>
+<p>Index of 'l': {{ str.indexOf('l') }}</p>
+<p>Sliced string: {{ str.slice(1, 4) }}</p>
+
+<h3 class="section-spacing">Array Functions</h3>
+<p>Array: {{ arr }}</p>
+<p>Pushing 'D' into array: {{ arr.push('D') }}</p>
+<p>Popped element: {{ arr.pop() }}</p>
+<p>Shifted element: {{ arr.shift() }}</p>
+<p>Unshifted 'Z' into array: {{ arr.unshift('Z') }}</p>
+<p>Concatenated arrays: {{ arr.concat(['E', 'F']) }}</p>
+<p>Joined array: {{ arr.join('-') }}</p>
+<p>Sliced array: {{ arr.slice(1, 3) }}</p>
+
+<h3 class="section-spacing">Math Functions</h3>
+<p>Random number: {{ randomNumber() }}</p>
+<p>Max number: {{ maxNumber(5, 10, 2) }}</p>
+<p>Min number: {{ minNumber(5, 10, 2) }}</p>
+<p>Rounded number: {{ roundNumber(4.6) }}</p>
+<p>Floored number: {{ floorNumber(4.6) }}</p>
+<p>Ceiled number: {{ ceilNumber(4.2) }}</p>
+<div class="spacer-1"></div>
+
+<!-- Built-in TypeScript Functions (which are not in JavaScript) -->
+<h2>Built-in TypeScript Functions (which are not in JavaScript)</h2>
+
+<h3 class="section-spacing">Type Utility Functions</h3>
+<p>Partial&lt;Person&gt;: {{ partialPerson | json }}</p> <!-- import JsonPipe "@angular/common" in ts -->
+<p>Readonly&lt;Person&gt;: {{ readonlyPerson | json }}</p>
+<p>Pick&lt;Person, 'name'&gt;: {{ pickedPerson | json }}</p>
+<p>Omit&lt;Person, 'age'&gt;: {{ omittedPerson | json }}</p>
+<!-- &lt; and &gt; are HTML entities that represent the less-than symbol < and the greater-than symbol >, respectively. -->
+
+<h3 class="section-spacing">Type Assertion and Checking</h3>
+<p>Type Assertion (value as string): {{ getValueAsUppercase() }}</p>
+<p>Type Checking (is string): {{ isValueString() }}</p>
+
+<h3 class="section-spacing">Type Conversion</h3>
+<p>parseInt("10"): {{ parseIntValue }}</p>
+<p>parseFloat("3.14"): {{ parseFloatValue }}</p>
+
+<div class="spacer-1"></div>
+
+<a routerLink="/student-table" class="router-link">
+  student-table
+</a>
