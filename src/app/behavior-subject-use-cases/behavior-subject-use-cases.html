@@ -16,11 +16,14 @@
   ✅ Cached data has been logged to the browser console.
 </p>
 <p>Data: {{ cachedData$ | async | json }}</p>
-<p *ngIf="(cachedData$ | async)?.length === 0">No data available</p>
-<div class="bordered">
-  <app-child-behavior-subject-use-case-two *ngIf="(cachedData$ | async)?.length > 0"
-    [products]="cachedData$ | async"></app-child-behavior-subject-use-case-two>
+<div class="bordered" *ngIf="(cachedData$ | async) as products; else noData">
+  <app-child-behavior-subject-use-case-two
+    [products]="products">
+  </app-child-behavior-subject-use-case-two>
 </div>
+<ng-template #noData>
+  <p>No data available</p>
+</ng-template>
 <div class="spacer-2"></div>
 
 <!-- Use Case 3: Event Bus -->

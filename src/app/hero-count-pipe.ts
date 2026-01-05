@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Hero } from './can-fly-pipe';
+import { Hero } from './hero.model';
 
 @Pipe({
   name: 'heroCount',

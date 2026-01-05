@@ -2,9 +2,10 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CanFlyPipe, Hero } from '../can-fly-pipe';
+import { CanFlyPipe } from '../can-fly-pipe';
 import { CapitalizePipe } from '../capitalize-pipe';
 import { HeroCountPipe } from '../hero-count-pipe';
+import { Hero } from '../hero.model';
 
 @Component({
   selector: 'app-custom-pipe',
