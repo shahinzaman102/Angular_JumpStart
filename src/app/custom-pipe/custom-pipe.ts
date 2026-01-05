@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CanFlyPipe } from '../can-fly-pipe';
+import { CanFlyPipe, Hero } from '../can-fly-pipe';
 import { CapitalizePipe } from '../capitalize-pipe';
 import { HeroCountPipe } from '../hero-count-pipe';
 
@@ -21,7 +21,7 @@ import { HeroCountPipe } from '../hero-count-pipe';
 export class CustomPipe {
   private http = inject(HttpClient);
 
-  protected heroes$: Observable<any[]> = this.http.get<any[]>('/heroes.json');
+  protected heroes$: Observable<Hero[]> = this.http.get<Hero[]>('/heroes.json');
 }
 
 // We create custom pipes in an Angular app for various reasons

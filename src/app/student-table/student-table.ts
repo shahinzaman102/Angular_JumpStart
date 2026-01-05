@@ -48,7 +48,7 @@ interface Classroom {
   styleUrls: ['./student-table.css']
 })
 export class StudentTable {
-  // students = [   // TypeScript: inference
+
   students: Student[] = [
     {
       id: 1,
@@ -72,7 +72,6 @@ export class StudentTable {
     }
   ];
 
-  // classrooms = [   // TypeScript: inference
   classrooms: Classroom[] = [
     {
       id: 1,
@@ -128,12 +127,10 @@ export class StudentTable {
     }
   ];
 
-  // getTotalMarks(student: any): number {   // TypeScript: inference
   getTotalMarks(student: Student): number {
     return student.subjects.reduce((sum, s) => sum + s.marks, 0);
   }
 
-  // getRanking(student: any): number {   // TypeScript: inference
   getRanking(student: Student): number {
     const totalMarks = this.getTotalMarks(student);
     let ranking = 1;
@@ -145,7 +142,6 @@ export class StudentTable {
     return ranking;
   }
 
-  // getRanking_2(student: any, classroom: any): number {   // TypeScript: inference
   getRanking_2(student: Student, classroom: Classroom): number {
     const totalMarks = this.getTotalMarks(student);
     let ranking = 1;

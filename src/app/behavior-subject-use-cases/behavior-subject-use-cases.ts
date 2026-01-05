@@ -57,9 +57,9 @@ export class BehaviorSubjectUseCases implements OnDestroy {
   protected message!: string;
 
   // Use Case 2: Caching
-  private readonly cachedDataSubject: BehaviorSubject<any> = new BehaviorSubject(null);
-  // protected readonly fetchedData$ = new BehaviorSubject<any>(null);
-  protected readonly cachedData$: Observable<any>;
+  protected readonly fetchedData$ = new BehaviorSubject<Product[] | null>(null);
+  private readonly cachedDataSubject = new BehaviorSubject<Product[] | null>(null);
+  protected readonly cachedData$: Observable<Product[] | null>;
   private cachedDataSubscription!: Subscription;
   protected getCacheClicked = false;
 

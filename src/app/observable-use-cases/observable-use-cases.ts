@@ -41,6 +41,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, interval, BehaviorSubject } from 'rxjs';
 import { switchMap, map, delay, takeUntil, finalize } from 'rxjs/operators';
+import { Todo } from '../todo.model';
 
 @Component({
   selector: 'app-observable-use-cases',
@@ -51,7 +52,7 @@ import { switchMap, map, delay, takeUntil, finalize } from 'rxjs/operators';
 })
 export class ObservableUseCases implements OnDestroy {
   protected isLoading = false;
-  protected items$: Observable<string[]> | null = null;
+  protected items$!: Observable<string[]>;
 
   private fetchTrigger$ = new Subject<void>();
   private cancelTrigger$ = new Subject<void>();
@@ -72,10 +73,10 @@ export class ObservableUseCases implements OnDestroy {
       switchMap(() => {
         this.isLoading = true;
         // Send an HTTP request to fetch the data
-        return this.http.get<any[]>('https://jsonplaceholder.typicode.com/todos').pipe(
+        return this.http.get<Todo[]>('https://jsonplaceholder.typicode.com/todos').pipe(
           delay(5000),
           // Use Case - 2: Data transformation --> 
-          map(data => data.map(item => item.title)),
+          map(todos => todos.map(todo => todo.title)),
           takeUntil(this.cancelTrigger$),
           finalize(() => this.isLoading = false) // Set isLoading to false when data is fetched
         );

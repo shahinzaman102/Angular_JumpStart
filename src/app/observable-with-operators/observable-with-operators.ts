@@ -91,6 +91,7 @@ import { CommonModule } from '@angular/common';
 import { Observable, interval, of, from, fromEvent, merge, Subscription } from 'rxjs';
 import { map, filter, take, tap, switchMap } from 'rxjs/operators';
 import { RouterModule } from '@angular/router';
+import { Item } from '../item.model';
 
 @Component({
   selector: 'app-observable-with-operators',
@@ -102,7 +103,7 @@ import { RouterModule } from '@angular/router';
 export class ObservableWithOperators implements OnInit, OnDestroy {
   protected title = 'rxjs-operators';
   protected greeting$: Observable<string> = of('');
-  protected items$: Observable<any[]> = of([]); // `any` cause array of json objects
+  protected items$: Observable<Item[]> = of([]);
   protected lastKeyPressed = '';
 
   private evenNumbersSubscription?: Subscription; // to unsubscribe to avoid memory leak
