@@ -4,11 +4,15 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
+    "rootDir": ".",
     "types": []
   },
   "include": [
-    "src/**/*.ts"
-, "capitalize.pipe.ts", "can-fly.pipe.ts", "hero-count.pipe.ts"  ],
+    "src/**/*.ts",
+    "capitalize.pipe.ts",
+    "can-fly.pipe.ts",
+    "hero-count.pipe.ts"
+  ],
   "exclude": [
     "src/**/*.spec.ts"
   ]
