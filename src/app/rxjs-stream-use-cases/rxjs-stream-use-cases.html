@@ -1,0 +1,39 @@
+<h2>Where RxJS Outshines Signals</h2>
+
+<section>
+  <h3>1. High-Frequency DOM Events</h3>
+  <p>Mouse: X: {{ mouse().x }}, Y: {{ mouse().y }}</p>
+</section>
+
+<section>
+  <h3>2. Debounced Search</h3>
+  <input (input)="searchInput.set($any($event.target).value)" placeholder="Type fast..." />
+  <p>Emitted Result: <strong>{{ debouncedText() }}</strong></p>
+</section>
+
+<section>
+  <h3>3. Async Queue (concatMap)</h3>
+  <button (click)="queue$.next(1)">Task 1</button>
+  <button (click)="queue$.next(2)">Task 2</button>
+  <p>Last Processed: <strong>{{ queueLog() }}</strong></p>
+</section>
+
+<section>
+  <h3>4. Ignore Clicks Until Done (exhaustMap)</h3>
+  <button (click)="exhaust$.next()">Run 2s Task (Spam click me)</button>
+  <p>Status: <strong>{{ exhaustStatus() }}</strong></p>
+</section>
+
+<section>
+  <h3>5. Time-based Stream (interval)</h3>
+  <p>Timer: <strong>{{ timer() }}</strong></p>
+  <button (click)="streamOn.set(true)">Start</button>
+  <button (click)="streamOn.set(false)">Stop</button>
+</section>
+
+<section>
+  <h3>6. Stream Cancellation (takeUntil)</h3>
+  <p>Status: <strong>{{ cancelStatus() }}</strong></p>
+  <button (click)="startTask()">Start 3s Task</button>
+  <button (click)="cancelTask()">Cancel Now</button>
+</section>

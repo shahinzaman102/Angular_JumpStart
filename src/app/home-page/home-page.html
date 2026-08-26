@@ -1,0 +1,45 @@
+<table class="routes-table">
+  <thead>
+    <tr>
+      <th class="routes-header">Title</th>
+      <th class="routes-header">Link</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (route of routes(); track route.path) {
+      @if (route.path) {
+        <tr>
+          <td class="routes-cell">
+            <div class="route-title">
+              {{ formatTitle(route.path) }}
+            </div>
+
+            @if (getUseCaseLabel(route.path)) {
+              <div class="use-case-label">
+                {{ getUseCaseLabel(route.path) }}
+              </div>
+            }
+
+            <ul class="description-list">
+              @for (line of splitDescription(route.path); track $index) {
+                <li>{{ line }}</li>
+              }
+            </ul>
+          </td>
+
+          <td class="routes-cell">
+            <a
+              [href]="'/' + route.path"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="route-link"
+            >
+              {{ formatTitle(route.path) }}
+            </a>
+          </td>
+        </tr>
+      }
+    }
+  </tbody>
+</table>
