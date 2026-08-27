@@ -20,6 +20,8 @@ export interface Product {
   templateUrl: './signal-use-cases.html',
   styleUrl: './signal-use-cases.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  // Do NOT set `OnPush` explicitly cause it's the default in Angular v22+.
+  // We've set to provide clarity..
 })
 export class SignalUseCases {
   private readonly stateService = inject(SignalStateService);

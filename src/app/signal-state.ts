@@ -1,9 +1,6 @@
-import { Injectable, signal } from '@angular/core';
+import { Service, signal } from '@angular/core';
 
-@Injectable({
-    providedIn: 'root'
-})
-
+@Service()
 export class SignalStateService {
     // Private writable signal
     private readonly _message = signal('Initial Shared State');

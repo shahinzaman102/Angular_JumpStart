@@ -1,11 +1,14 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
+  imports: [RouterLink],
   templateUrl: './home-page.html',
   styleUrl: './home-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  // Do NOT set `OnPush` explicitly cause it's the default in Angular v22+.
+  // We've set to provide clarity..
 })
 export class HomePage {
   private readonly router = inject(Router);
@@ -14,12 +17,14 @@ export class HomePage {
     'signal-use-cases': 'Signals',
     'rxjs-stream-use-cases': 'RxJS',
     'pipes-use-cases': 'Pipes',
+    'forms-use-cases': 'Forms',
   };
 
   private readonly useCaseLabels: Record<string, string> = {
     'signal-use-cases': 'Use Cases (handles state):',
     'rxjs-stream-use-cases': 'Use Cases (handles event streams):',
     'pipes-use-cases': 'Use Cases (handles data transformation):',
+    'forms-use-cases': 'Use Cases (handles user input):',
   };
 
   private readonly descriptions: Record<string, string> = {
@@ -37,8 +42,15 @@ export class HomePage {
       Time-Based Streams
       Stream Cancellation`,
 
-    'pipes-use-cases': `Built-in Pipes
-      Custom Pipes`
+    'pipes-use-cases': `Formatting & Display
+      Object & Data Inspection
+      Asynchronous Data
+      File Size Formatting
+      Relative Time Display`,
+
+    'forms-use-cases': `Simple Forms
+      Complex & Dynamic Forms
+      Signal-Based Forms(Experimental)`
   };
 
   protected readonly routes = computed(() =>

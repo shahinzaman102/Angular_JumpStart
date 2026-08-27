@@ -1,0 +1,54 @@
+.forms-use-cases {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 24px;
+  font-family: sans-serif;
+}
+
+.form-section {
+  border: 2px solid #999;
+  padding: 16px;
+}
+
+.form-section-spaced {
+  margin-bottom: 32px;
+}
+
+.error-message {
+  color: #b00020;
+}
+
+.button-spaced-small {
+  margin-top: 8px;
+}
+
+.tags-added {
+  margin-top: 12px;
+}
+
+.checking-availability {
+  color: #666;
+}
+
+.field-spaced {
+  margin-top: 12px;
+}
+
+.label-spaced {
+  margin-left: 12px;
+}
+
+.button-spaced {
+  margin-top: 12px;
+}
+
+.result-output {
+  background: #f4f4f4;
+  padding: 8px;
+  margin-top: 12px;
+}
+
+.taken-ids {
+  color: #64748b;
+  font-size: 0.9rem;
+}

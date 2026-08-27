@@ -6,6 +6,8 @@ import { SignalStateService } from '../signal-state';
   templateUrl: './signal-child.html',
   styleUrl: './signal-child.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  // Do NOT set `OnPush` explicitly cause it's the default in Angular v22+.
+  // We've set to provide clarity..
 })
 
 export class SignalChildComponent {

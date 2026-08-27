@@ -1,8 +1,6 @@
-import { Injectable, signal } from '@angular/core';
+import { Service, signal } from '@angular/core';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Service()
 export class ReportExportService {
     protected readonly _lastExport = signal<string | null>(null);
     readonly lastExport = this._lastExport.asReadonly();

@@ -30,9 +30,7 @@
 
           <td class="routes-cell">
             <a
-              [href]="'/' + route.path"
-              target="_blank"
-              rel="noopener noreferrer"
+              [routerLink]="['/', route.path]"
               class="route-link"
             >
               {{ formatTitle(route.path) }}

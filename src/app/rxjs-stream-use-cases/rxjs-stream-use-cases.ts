@@ -12,6 +12,8 @@ import { debounceTime, switchMap, concatMap,
   templateUrl: './rxjs-stream-use-cases.html',
   styleUrl: './rxjs-stream-use-cases.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  // Do NOT set `OnPush` explicitly cause it's the default in Angular v22+.
+  // We've set to provide clarity..
 })
 export class RxjsStreamUseCases {
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));

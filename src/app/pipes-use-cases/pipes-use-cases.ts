@@ -40,6 +40,8 @@ interface ServerStatus {
   templateUrl: './pipes-use-cases.html',
   styleUrl: './pipes-use-cases.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  // Do NOT set `OnPush` explicitly cause it's the default in Angular v22+.
+  // We've set to provide clarity..
 })
 export class PipesUseCases {
   // Practical Built-In Pipe Data

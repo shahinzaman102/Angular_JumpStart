@@ -1,0 +1,192 @@
+<div class="forms-use-cases">
+
+  <h1>Angular Forms: 3 Approaches Side-by-Side</h1>
+
+  <!-- ================================================================ -->
+  <!-- 1) TEMPLATE-DRIVEN FORM (FormsModule)                             -->
+  <!-- ================================================================ -->
+  <section class="form-section form-section-spaced">
+    <h2>1. Template-Driven Form (FormsModule)</h2>
+    <p>
+      <strong>When to use:</strong> tiny, low-complexity forms (login, quick admin actions,
+      newsletter signup). Angular builds the form model for you from <code>ngModel</code>;
+      validation rules live directly in the HTML as directives (<code>required</code>, etc.).
+      Least code for simple cases, but harder to scale for dynamic/complex logic.
+    </p>
+
+    <form #tagForm="ngForm" (ngSubmit)="onTdSubmit(tagForm)">
+      <label>
+        Tag name
+        <input
+          type="text"
+          name="tagName"
+          [(ngModel)]="tdModel.tagName"
+          #tagNameControl="ngModel"
+          required
+          minlength="2"
+        />
+      </label>
+
+      @if (tagNameControl.invalid && tagNameControl.touched) {
+        <div class="error-message">
+          @if (tagNameControl.errors?.['required']) {
+            <span>Tag name is required.</span>
+          }
+          @if (tagNameControl.errors?.['minlength']) {
+            <span>Tag name must be at least 2 characters.</span>
+          }
+        </div>
+      }
+
+      <button type="submit" [disabled]="tagForm.invalid" class="button-spaced-small">
+        Add Tag
+      </button>
+    </form>
+
+    @if (tdSubmittedTags.length) {
+      <div class="tags-added">
+        <strong>Tags added:</strong>
+        <ul>
+          @for (tag of tdSubmittedTags; track tag) {
+            <li>{{ tag }}</li>
+          }
+        </ul>
+      </div>
+    }
+  </section>
+
+  <!-- ================================================================ -->
+  <!-- 2) REACTIVE FORM                                                  -->
+  <!-- ================================================================ -->
+  <section class="form-section form-section-spaced">
+    <h2>2. Reactive Form</h2>
+    <p>
+      <strong>When to use:</strong> complex, dynamic, or programmatically-built forms —
+      multi-step wizards, conditional fields (like this IoT sensor config, where fields
+      change based on sensor type), schema-driven forms, or forms needing custom async
+      validators (e.g. checking device ID uniqueness against a Go/Echo API). The form
+      model lives in TypeScript, giving full control.
+    </p>
+    <p class="taken-ids">
+      <i>IDs are already taken: device-0001, sensor-test</i>
+    </p>
+
+    <form [formGroup]="deviceForm" (ngSubmit)="onReactiveSubmit()">
+      <label>
+        Device ID
+        <input type="text" formControlName="deviceId" placeholder="e.g. sensor-1234" />
+      </label>
+      @if (deviceForm.get('deviceId')?.pending) {
+        <span class="checking-availability"> checking availability…</span>
+      }
+      @if (deviceForm.get('deviceId')?.hasError('deviceIdTaken')) {
+        <div class="error-message">This device ID is already taken.</div>
+      }
+      @if (deviceForm.get('deviceId')?.hasError('required') && deviceForm.get('deviceId')?.touched) {
+        <div class="error-message">Device ID is required.</div>
+      }
+      @if (deviceForm.get('deviceId')?.hasError('minlength')) {
+        <div class="error-message">Device ID must be at least 4 characters.</div>
+      }
+
+      <div class="field-spaced">
+        <label>
+          Sensor type
+          <select formControlName="sensorType">
+            @for (type of sensorTypes; track type) {
+              <option [value]="type">{{ type }}</option>
+            }
+          </select>
+        </label>
+      </div>
+
+      <!-- Conditional fields: only the block matching sensorType is enabled/shown -->
+      @if (sensorType === 'temperature') {
+        <fieldset formGroupName="minMaxC" class="field-spaced">
+          <legend>Temperature thresholds (°C)</legend>
+          <label>Min <input type="number" formControlName="min" /></label>
+          <label class="label-spaced">Max <input type="number" formControlName="max" /></label>
+        </fieldset>
+      }
+
+      @if (sensorType === 'gps') {
+        <div class="field-spaced">
+          <label>
+            Location report interval (seconds)
+            <input type="number" formControlName="locationInterval" />
+          </label>
+        </div>
+      }
+
+      @if (sensorType === 'humidity') {
+        <div class="field-spaced">
+          <label>
+            Humidity alert threshold (%)
+            <input type="number" formControlName="humidityThreshold" />
+          </label>
+        </div>
+      }
+
+      <button type="submit" [disabled]="deviceForm.invalid" class="button-spaced">
+        Save Device Config
+      </button>
+    </form>
+
+    @if (reactiveSubmitResult) {
+      <pre class="result-output">{{ reactiveSubmitResult }}</pre>
+    }
+  </section>
+
+  <!-- ================================================================ -->
+  <!-- 3) SIGNAL FORMS (experimental)                                    -->
+  <!-- ================================================================ -->
+  @defer (on immediate) {
+    <section class="form-section">
+      <h2>3. Signal Forms (Experimental)</h2>
+      <p>
+        <strong>When to use:</strong> new internal/greenfield prototypes where you want
+        forms wired directly into signal-based state, with no RxJS glue — good for a small
+        team building experience with the API. <strong>Not recommended yet</strong> for
+        customer-facing or business-critical forms, since the API is still experimental
+        and can change without notice.
+      </p>
+
+      <form (ngSubmit)="onSignalSubmit()">
+        <label>
+          Email
+          <input type="email" [formField]="loginForm.email" />
+        </label>
+        @if (loginForm.email().touched() && loginForm.email().invalid()) {
+          <div class="error-message">
+            @for (err of loginForm.email().errors(); track err.kind) {
+              <div>{{ err.message }}</div>
+            }
+          </div>
+        }
+
+        <div class="field-spaced">
+          <label>
+            Password
+            <input type="password" [formField]="loginForm.password" />
+          </label>
+          @if (loginForm.password().touched() && loginForm.password().invalid()) {
+            <div class="error-message">
+              @for (err of loginForm.password().errors(); track err.kind) {
+                <div>{{ err.message }}</div>
+              }
+            </div>
+          }
+        </div>
+
+        <button type="submit" [disabled]="loginForm().invalid()" class="button-spaced">
+          Sign In
+        </button>
+      </form>
+
+      @if (signalSubmitResult()) {
+        <pre class="result-output">{{ signalSubmitResult() }}</pre>
+      }
+    </section>
+  }
+
+</div>
