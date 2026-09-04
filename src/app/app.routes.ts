@@ -23,6 +23,11 @@ export const routes: Routes = [
         path: 'forms-use-cases',
         loadComponent: () => import('./forms-use-cases/forms-use-cases').then(m => m.FormsUseCases),
     },
+    {
+        path: 'lifecycle-use-cases',
+        loadComponent: () =>
+            import('./lifecycle-use-cases/lifecycle-use-cases').then(m => m.LifecycleUseCases),
+    },
     { // ** (Catch-all): Redirects any invalid or unknown URL back to the home page (/).
         path: '**',
         redirectTo: ''

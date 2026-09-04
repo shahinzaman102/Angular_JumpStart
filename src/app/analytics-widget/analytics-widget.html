@@ -1,0 +1,32 @@
+<div class="widget-card">
+  <header>
+    <h3>{{ widgetTitle() }}</h3>
+
+    <!-- 
+      PROJECTED SCOPE (owned by the PARENT template).
+      Content placed here by the caller becomes visible/queryable
+      only from ngAfterContentInit() onward, and is re-verified on
+      every ngAfterContentChecked() pass.
+    -->
+    <ng-content></ng-content>
+  </header>
+
+  <main>
+    <p>Metric Value: <strong>{{ metricData()?.value }}</strong></p>
+
+    <!-- 
+      OWN VIEW SCOPE (this component's own template).
+      Data changes here are tracked via ngDoCheck(); the DOM node
+      itself is first available via viewChild() in ngAfterViewInit()
+      and re-verified on every ngAfterViewChecked() pass.
+    -->
+    <div #chartContainer class="chart-box">
+      <p>Chart Canvas (Rendered)</p>
+    </div>
+
+    <div class="local-state-demo">
+      <p>Internal State Counter: {{ internalCounter() }}</p>
+      <button (click)="incrementLocalCounter()">Increment Internal State</button>
+    </div>
+  </main>
+</div>

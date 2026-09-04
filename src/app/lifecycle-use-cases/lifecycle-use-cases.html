@@ -1,0 +1,39 @@
+<div class="demo-container">
+  <h2>Lifecycle Hooks Demo</h2>
+  <p>Open your browser console (F12) to inspect the execution order.</p>
+
+  <div class="action-bar">
+    <!--
+      Triggers: child's ngOnChanges -> ngDoCheck -> ngAfterContentChecked
+      -> ngAfterViewChecked (component stays mounted; only data changes).
+    -->
+    <button (click)="updateMetric()">Update Metric Input</button>
+
+    <!--
+      Triggers: full mount sequence (constructor..ngAfterViewInit) when
+      turning the widget ON, or ngOnDestroy when turning it OFF.
+    -->
+    <button (click)="toggleWidget()">Toggle Widget (Destroy / Mount)</button>
+  </div>
+
+  @if (showWidget()) {
+    <!--
+      Mounting this element is what instantiates AnalyticsWidgetComponent
+      and kicks off its constructor. Removing it (showWidget() === false)
+      unmounts it and fires ngOnDestroy.
+    -->
+    <app-analytics-widget 
+      [widgetTitle]="'Real-Time Traffic'" 
+      [metricData]="currentMetric()"
+    >
+        <!--
+          Projected content (Content Scope). This <span> is captured by
+          the child's `contentChild('projectedHeader')` and becomes
+          available inside the child's ngAfterContentInit(), NOT before.
+        -->
+        <span #projectedHeader class="status-badge">
+            • Live Feed Active
+        </span>
+    </app-analytics-widget>
+  }
+</div>

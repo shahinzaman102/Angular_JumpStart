@@ -1,0 +1,13 @@
+.widget-card { 
+    border: 1px solid #ccc; 
+    padding: 16px; 
+    border-radius: 8px; 
+    margin-top: 12px; 
+}
+
+.chart-box { 
+    background: #f0f4f8; 
+    padding: 12px; 
+    margin-top: 8px; 
+    border-radius: 4px; 
+}

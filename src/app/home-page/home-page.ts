@@ -18,6 +18,7 @@ export class HomePage {
     'rxjs-stream-use-cases': 'RxJS',
     'pipes-use-cases': 'Pipes',
     'forms-use-cases': 'Forms',
+    'lifecycle-use-cases': 'Lifecycle',
   };
 
   private readonly useCaseLabels: Record<string, string> = {
@@ -25,6 +26,7 @@ export class HomePage {
     'rxjs-stream-use-cases': 'Use Cases (handles event streams):',
     'pipes-use-cases': 'Use Cases (handles data transformation):',
     'forms-use-cases': 'Use Cases (handles user input):',
+    'lifecycle-use-cases': 'Use Cases (handles component setup/teardown):',
   };
 
   private readonly descriptions: Record<string, string> = {
@@ -50,7 +52,13 @@ export class HomePage {
 
     'forms-use-cases': `Simple Forms
       Complex & Dynamic Forms
-      Signal-Based Forms(Experimental)`
+      Signal-Based Forms(Experimental)`,
+
+    'lifecycle-use-cases': `Construction & Injection Context
+      Input Change Tracking
+      Content & View Projection
+      Post-Paint Render Hooks
+      Cleanup & Teardown`
   };
 
   protected readonly routes = computed(() =>

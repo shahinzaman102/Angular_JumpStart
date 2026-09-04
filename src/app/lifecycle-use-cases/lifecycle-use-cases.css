@@ -1,0 +1,14 @@
+.demo-container {
+  padding: 20px;
+}
+
+.action-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.status-badge {
+  color: green;
+  font-weight: bold;
+}
