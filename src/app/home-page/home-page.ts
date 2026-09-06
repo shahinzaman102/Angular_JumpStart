@@ -19,6 +19,7 @@ export class HomePage {
     'pipes-use-cases': 'Pipes',
     'forms-use-cases': 'Forms',
     'lifecycle-use-cases': 'Lifecycle',
+    'route-guards-use-cases': 'Route Guards'
   };
 
   private readonly useCaseLabels: Record<string, string> = {
@@ -27,6 +28,7 @@ export class HomePage {
     'pipes-use-cases': 'Use Cases (handles data transformation):',
     'forms-use-cases': 'Use Cases (handles user input):',
     'lifecycle-use-cases': 'Use Cases (handles component setup/teardown):',
+    'route-guards-use-cases': 'Use Cases (handles navigation & access control):'
   };
 
   private readonly descriptions: Record<string, string> = {
@@ -58,7 +60,13 @@ export class HomePage {
       Input Change Tracking
       Content & View Projection
       Post-Paint Render Hooks
-      Cleanup & Teardown`
+      Cleanup & Teardown`,
+
+    'route-guards-use-cases': `
+      CanActivate (Page Protection)
+      CanActivateChild (Nested Route Protection)
+      CanDeactivate (Unsaved Changes Warning)
+      CanMatch (Dynamic Feature Flag Routing)`
   };
 
   protected readonly routes = computed(() =>
@@ -66,6 +74,7 @@ export class HomePage {
       (route) =>
         route.path &&
         route.path !== '**' &&
+        route.path !== 'route-guards-guide' && // Hide guide page from table listing
         (route.loadComponent || route.component)
     )
   );

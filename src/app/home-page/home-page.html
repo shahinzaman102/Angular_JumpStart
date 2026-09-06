@@ -26,6 +26,20 @@
                 <li>{{ line }}</li>
               }
             </ul>
+
+            <!-- Added Testing Guide Link for Route Guards -->
+            @if (route.path === 'route-guards-use-cases') {
+              <div class="guide-link-container" style="margin-top: 10px;">
+                <a 
+                  routerLink="/route-guards-guide" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  style="color: #0066cc; font-size: 0.88rem; text-decoration: underline;"
+                >
+                  📖 View Testing Guide & Instructions 🡥
+                </a>
+              </div>
+            }
           </td>
 
           <td class="routes-cell">

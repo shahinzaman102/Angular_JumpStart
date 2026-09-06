@@ -1,0 +1,48 @@
+<div class="guide-container">
+  <h1>Route Guards Testing & Feature Guide</h1>
+
+  <section class="guide-section">
+    <h2>1. How to Bypass <code>CanActivate</code> Initial Block</h2>
+    <p>By default, navigation to the playground is blocked unless the user is logged in.</p>
+    <ol>
+      <li>Open Browser Developer Tools (<code>F12</code> or Right-Click &rarr; Inspect).</li>
+      <li>Navigate to the <strong>Console</strong> tab.</li>
+      <li>
+        Run the following command to set the login state:
+        <pre><code>localStorage.setItem('isLoggedIn', 'true');</code></pre>
+      </li>
+      <li>
+        Verify the state anytime using:
+        <ul>
+          <li><code>localStorage.getItem('isLoggedIn');</code> &mdash; Returns <code>'true'</code> or <code>'false'</code></li>
+          <li><code>localStorage.getItem('userRole');</code> &mdash; Returns <code>'admin'</code> or <code>'user'</code></li>
+          <li><code>localStorage.getItem('betaFeature');</code> &mdash; Returns <code>'true'</code> or <code>'false'</code></li>
+        </ul>
+      </li>
+    </ol>
+  </section>
+
+  <section class="guide-section">
+    <h2>2. Guard Behaviors & Demonstration</h2>
+    
+    <div class="guard-card">
+      <h3><code>CanActivate</code> (Page Protection)</h3>
+      <p>Triggers when clicking the Route Guards link from the home page. Blocks access and alerts if <code>isLoggedIn</code> is not <code>'true'</code> in LocalStorage.</p>
+    </div>
+
+    <div class="guard-card">
+      <h3><code>CanActivateChild</code> (Nested Route Protection)</h3>
+      <p>Inside the playground, click <strong>Child Route A</strong> or <strong>Child Route B</strong>. Requires <code>userRole === 'admin'</code> to proceed.</p>
+    </div>
+
+    <div class="guard-card">
+      <h3><code>CanDeactivate</code> (Unsaved Changes Warning)</h3>
+      <p>Toggle the <strong>Form Has Unsaved Changes</strong> checkbox, then click <strong>Go Back Home</strong>. A browser confirmation dialog will prevent accidental navigation.</p>
+    </div>
+
+    <div class="guard-card">
+      <h3><code>CanMatch</code> (Dynamic Feature Flag Routing)</h3>
+      <p>Click <strong>Feature Route</strong>. If <code>betaFeature</code> is enabled, Angular matches and loads <code>BetaFeatureComponent</code>. Otherwise, it falls back to <code>StandardFeatureComponent</code>.</p>
+    </div>
+  </section>
+</div>

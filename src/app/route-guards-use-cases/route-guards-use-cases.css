@@ -1,0 +1,23 @@
+.playground-container {
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.toggles-card {
+  background: #f4f4f4;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.warning-label {
+  color: red;
+}
+
+.navigation-card {
+  margin-bottom: 20px;
+}
+
+.navigation-card a {
+  margin-right: 10px;
+}

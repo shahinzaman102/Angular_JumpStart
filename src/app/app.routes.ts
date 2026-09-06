@@ -1,11 +1,14 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './guards/auth.guard';
+import { adminChildGuard } from './guards/admin-child.guard';
+import { unsavedChangesGuard } from './guards/unsaved-changes.guard';
+import { featureFlagGuard } from './guards/feature-flag.guard';
 
 export const routes: Routes = [
     {
         path: '',
-        loadComponent: () => import('./home-page/home-page').then(m => m.HomePage), // m stands for module (or file module).
-    }, // loadComponent uses lazy loading — it downloads the component JavaScript 
-       // file only when the user actually navigates to that route.
+        loadComponent: () => import('./home-page/home-page').then(m => m.HomePage),
+    },
     {
         path: 'signal-use-cases',
         loadComponent: () => import('./signal-use-cases/signal-use-cases').then(m => m.SignalUseCases),
@@ -28,7 +31,41 @@ export const routes: Routes = [
         loadComponent: () =>
             import('./lifecycle-use-cases/lifecycle-use-cases').then(m => m.LifecycleUseCases),
     },
-    { // ** (Catch-all): Redirects any invalid or unknown URL back to the home page (/).
+    {
+        path: 'route-guards-guide',
+        loadComponent: () =>
+            import('./route-guards-use-cases/guide-page/guide-page').then(m => m.GuidePage)
+    },
+    
+    // --- ROUTE GUARDS DEMO ROUTE (Single Root Entry) ---
+    {
+        path: 'route-guards-use-cases',
+        loadComponent: () => import('./route-guards-use-cases/route-guards-use-cases').then(m => m.RouteGuardsUseCases),
+        canActivate: [authGuard],
+        canDeactivate: [unsavedChangesGuard],
+        canActivateChild: [adminChildGuard],
+        children: [
+            {
+                path: 'child-a',
+                loadComponent: () => import('./route-guards-use-cases/route-guards-use-cases').then(m => m.ChildAComponent)
+            },
+            {
+                path: 'child-b',
+                loadComponent: () => import('./route-guards-use-cases/route-guards-use-cases').then(m => m.ChildBComponent)
+            },
+            {
+                path: 'feature',
+                canMatch: [featureFlagGuard],
+                loadComponent: () => import('./route-guards-use-cases/route-guards-use-cases').then(m => m.BetaFeatureComponent)
+            },
+            {
+                path: 'feature',
+                loadComponent: () => import('./route-guards-use-cases/route-guards-use-cases').then(m => m.StandardFeatureComponent)
+            }
+        ]
+    },
+
+    {
         path: '**',
         redirectTo: ''
     }

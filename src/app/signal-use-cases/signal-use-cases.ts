@@ -1,8 +1,8 @@
 import { Component, computed, effect, inject, PLATFORM_ID, signal, resource, 
   linkedSignal, viewChild, ElementRef, ChangeDetectionStrategy,
   injectAsync,
-  onIdle} from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+  onIdle,
+  afterNextRender} from '@angular/core';
 import { httpResource } from '@angular/common/http';
 import { SignalStateService } from '../signal-state';
 import { SignalChildComponent } from '../signal-child/signal-child';
@@ -113,16 +113,30 @@ export class SignalUseCases {
   // 5. REACTIVE SIDE EFFECTS
   // ============================================================
   protected readonly theme = signal<'light' | 'dark'>('light');
+  private isLoaded = false;
 
-  // Inline effect field initializer (completely removes the constructor)
+  // 1. Keep effect as a field initializer (has Injection Context)
   private readonly _themeLogger = effect(() => {
     const currentTheme = this.theme();
-    console.log('Theme changed to:', currentTheme);
 
-    if (isPlatformBrowser(this.platformId)) {
-      localStorage.setItem('theme', currentTheme);
-    }
+    // Ignore the initial default run so we don't overwrite localStorage
+    if (!this.isLoaded) return;
+
+    console.log('Theme changed to:', currentTheme);
+    localStorage.setItem('theme', currentTheme);
   });
+
+  constructor() {
+    // 2. Read saved theme AFTER hydration completes in the browser
+    afterNextRender(() => {
+      const savedTheme = localStorage.getItem('theme') as 'light' | 'dark';
+      if (savedTheme) {
+        this.theme.set(savedTheme);
+      }
+      // Enable saving for future user interactions
+      this.isLoaded = true;
+    });
+  }
 
   protected toggleTheme(): void {
     this.theme.update(t => (t === 'light' ? 'dark' : 'light'));
