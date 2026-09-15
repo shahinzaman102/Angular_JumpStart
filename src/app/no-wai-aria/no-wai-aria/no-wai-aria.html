@@ -1,0 +1,38 @@
+<main class="slider-demo-container">
+  <h1>Accessible UI Demo</h1>
+
+  <section>
+    <h2>Custom Accessible Slider with WAI-ARIA Pattern</h2>
+
+    <no-wai-aria-custom-slider 
+      [value]="volume()" 
+      [min]="20" 
+      [max]="80" 
+      [step]="5"
+      [disabled]="isControlDisabled()"
+      [style.opacity]="isControlDisabled() ? '0.5' : '1'"
+      [themeColor]="themeColor()"
+      label="Media Volume"
+      (valueChange)="volume.set($event)"
+    />
+
+    <div class="controls-row">
+      <button 
+        (click)="toggleDisabled()"
+      >
+        Toggle Disabled State
+      </button>
+
+      <button 
+        [disabled]="isControlDisabled()"
+        (click)="toggleTheme()"
+      >
+        Toggle Theme Color
+      </button>
+    </div>
+
+    <p class="status-output">
+      Active Value: <strong>{{ volume() }}%</strong>
+    </p>
+  </section>
+</main>

@@ -6,7 +6,7 @@ import { featureFlagGuard } from './guards/feature-flag.guard';
 
 export const routes: Routes = [
     {
-        path: '',
+        path: '', 
         loadComponent: () => import('./home-page/home-page').then(m => m.HomePage),
     },
     {
@@ -15,7 +15,7 @@ export const routes: Routes = [
     },
     {
         path: 'rxjs-stream-use-cases',
-        loadComponent: () =>
+        loadComponent: () => 
             import('./rxjs-stream-use-cases/rxjs-stream-use-cases').then(m => m.RxjsStreamUseCases),
     },
     {
@@ -28,13 +28,16 @@ export const routes: Routes = [
     },
     {
         path: 'lifecycle-use-cases',
-        loadComponent: () =>
+        loadComponent: () => 
             import('./lifecycle-use-cases/lifecycle-use-cases').then(m => m.LifecycleUseCases),
     },
     {
-        path: 'route-guards-guide',
-        loadComponent: () =>
-            import('./route-guards-use-cases/guide-page/guide-page').then(m => m.GuidePage)
+        path: 'wai-aria', 
+        loadComponent: () => import('./wai-aria/wai-aria').then(m => m.WaiAria),
+    },
+    {
+        path: 'no-wai-aria',
+        loadComponent: () => import('./no-wai-aria/no-wai-aria/no-wai-aria').then(m => m.NoWaiAria),
     },
     
     // --- ROUTE GUARDS DEMO ROUTE (Single Root Entry) ---

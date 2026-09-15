@@ -21,6 +21,7 @@
     "@angular/platform-server": "^22.1.0",
     "@angular/router": "^22.1.0",
     "@angular/ssr": "^22.1.5",
+    "@axe-core/playwright": "^4.13.0",
     "express": "^5.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
@@ -32,6 +33,7 @@
     "@angular/build": "^22.1.5",
     "@angular/cli": "^22.1.5",
     "@angular/compiler-cli": "^22.1.0",
+    "@playwright/test": "^1.63.0",
     "@types/express": "^5.0.1",
     "@types/node": "^20.17.19",
     "@typescript-eslint/eslint-plugin": "^8.68.0",

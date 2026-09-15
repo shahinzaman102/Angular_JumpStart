@@ -50,7 +50,7 @@ import {
   styleUrl: './analytics-widget.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AnalyticsWidgetComponent implements
+export class AnalyticsWidget implements
   OnChanges,
   OnInit,
   DoCheck,

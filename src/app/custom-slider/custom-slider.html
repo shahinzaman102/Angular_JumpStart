@@ -1,0 +1,32 @@
+<!-- Visible Header: hidden from ARIA tree to eliminate duplicate text announcements -->
+<div class="slider-header" aria-hidden="true">
+  <span class="label-text">{{ label() }}: <strong>{{ value() }}%</strong></span>
+</div>
+
+<div class="minimal-slider-ui">
+  <div 
+    class="track" 
+    role="slider"
+    [tabindex]="disabled() ? -1 : 0"
+    [attr.aria-label]="label() + ', range ' + min() + ' to ' + max()"
+    [attr.aria-valuenow]="value()"
+    [attr.aria-disabled]="disabled() ? 'true' : null"
+    (keydown)="onKeyDown($event)"
+  ></div>
+
+  <button 
+    type="button" 
+    [attr.aria-label]="'Decrease ' + label()"
+    [class.btn-disabled]="disabled() || value() <= min()"
+    [disabled]="disabled() || value() <= min()"
+    (click)="adjust(-step())"
+  >-</button>
+
+  <button 
+    type="button" 
+    [attr.aria-label]="'Increase ' + label()"
+    [class.btn-disabled]="disabled() || value() >= max()"
+    [disabled]="disabled() || value() >= max()"
+    (click)="adjust(step())"
+  >+</button>
+</div>

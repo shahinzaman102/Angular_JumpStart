@@ -47,11 +47,18 @@ export default defineConfig(
             "@angular-eslint/template": angularTemplate,
         },
         rules: {
+            // Standard recommended rules
             "@angular-eslint/template/banana-in-box": "error",
             "@angular-eslint/template/no-negated-async": "error",
+
+            // Accessibility (a11y) rules
             "@angular-eslint/template/alt-text": "warn",
             "@angular-eslint/template/elements-content": "warn",
             "@angular-eslint/template/label-has-associated-control": "warn",
+            "@angular-eslint/template/click-events-have-key-events": "warn",
+            "@angular-eslint/template/no-positive-tabindex": "warn",
+            "@angular-eslint/template/interactive-supports-focus": "warn",
+            "@angular-eslint/template/role-has-required-aria": "warn",
         },
     }
 );

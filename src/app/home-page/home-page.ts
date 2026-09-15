@@ -1,14 +1,17 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
+export interface RouteGuideLink {
+  url: string;
+  label: string;
+}
+
 @Component({
   selector: 'app-home-page',
   imports: [RouterLink],
   templateUrl: './home-page.html',
   styleUrl: './home-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  // Do NOT set `OnPush` explicitly cause it's the default in Angular v22+.
-  // We've set to provide clarity..
 })
 export class HomePage {
   private readonly router = inject(Router);
@@ -19,7 +22,8 @@ export class HomePage {
     'pipes-use-cases': 'Pipes',
     'forms-use-cases': 'Forms',
     'lifecycle-use-cases': 'Lifecycle',
-    'route-guards-use-cases': 'Route Guards'
+    'route-guards-use-cases': 'Route Guards',
+    'wai-aria': 'WAI-ARIA'
   };
 
   private readonly useCaseLabels: Record<string, string> = {
@@ -28,7 +32,19 @@ export class HomePage {
     'pipes-use-cases': 'Use Cases (handles data transformation):',
     'forms-use-cases': 'Use Cases (handles user input):',
     'lifecycle-use-cases': 'Use Cases (handles component setup/teardown):',
-    'route-guards-use-cases': 'Use Cases (handles navigation & access control):'
+    'route-guards-use-cases': 'Use Cases (handles navigation & access control):',
+    'wai-aria': 'Use Cases (handles UI accessibility & ARIA bindings):'
+  };
+
+  private readonly guideLinks: Record<string, RouteGuideLink> = {
+    'route-guards-use-cases': {
+      url: 'https://docs.google.com/document/d/1RNCyDn1otQr-SROdiGKYvlVWvAaPtHyyU3UzeKvoO8c/edit?usp=sharing',
+      label: '📖 View Route Guards Testing Guide & Instructions 🡥'
+    },
+    'wai-aria': {
+      url: 'https://docs.google.com/document/d/1d-f7dUi-_PUO4HNfNJMjvIHbSirTVHyqLoWoFb0E3Xk/edit?usp=sharing',
+      label: '📖 View WAI-ARIA Accessibility Testing Guide & Instructions 🡥'
+    }
   };
 
   private readonly descriptions: Record<string, string> = {
@@ -46,17 +62,20 @@ export class HomePage {
       Time-Based Streams
       Stream Cancellation`,
 
-    'pipes-use-cases': `Formatting & Display
+    'pipes-use-cases': `
+      Formatting & Display
       Object & Data Inspection
       Asynchronous Data
       File Size Formatting
       Relative Time Display`,
 
-    'forms-use-cases': `Simple Forms
+    'forms-use-cases': `
+      Simple Forms
       Complex & Dynamic Forms
       Signal-Based Forms(Experimental)`,
 
-    'lifecycle-use-cases': `Construction & Injection Context
+    'lifecycle-use-cases': `
+      Construction & Injection Context
       Input Change Tracking
       Content & View Projection
       Post-Paint Render Hooks
@@ -66,18 +85,37 @@ export class HomePage {
       CanActivate (Page Protection)
       CanActivateChild (Nested Route Protection)
       CanDeactivate (Unsaved Changes Warning)
-      CanMatch (Dynamic Feature Flag Routing)`
+      CanMatch (Dynamic Feature Flag Routing)`,
+
+    'wai-aria': `
+      Custom WAI-ARIA Slider Pattern
+      Signal-Driven Host Style & Attribute Bindings
+      Screen Reader Live Regions (aria-live)
+      High Contrast & Forced Colors Mode Support
+      Keyboard Navigation & Focus Management`
   };
 
-  protected readonly routes = computed(() =>
-    this.router.config.filter(
-      (route) =>
-        route.path &&
-        route.path !== '**' &&
-        route.path !== 'route-guards-guide' && // Hide guide page from table listing
-        (route.loadComponent || route.component)
-    )
-  );
+  protected readonly routes = computed(() => {
+    const targetOrder = Object.keys(this.titles);
+
+    return this.router.config
+      .filter(
+        (route) =>
+          route.path &&
+          route.path !== '**' &&
+          route.path !== 'no-wai-aria' &&
+          (route.loadComponent || route.component)
+      )
+      .sort((a, b) => {
+        const indexA = targetOrder.indexOf(a.path ?? '');
+        const indexB = targetOrder.indexOf(b.path ?? '');
+
+        if (indexA === -1) return 1;
+        if (indexB === -1) return -1;
+
+        return indexA - indexB;
+      });
+  });
 
   protected formatTitle(path: string): string {
     return (
@@ -88,6 +126,10 @@ export class HomePage {
 
   protected getUseCaseLabel(path: string): string {
     return this.useCaseLabels[path] ?? '';
+  }
+
+  protected getGuideLink(path: string): RouteGuideLink | undefined {
+    return this.guideLinks[path];
   }
 
   protected splitDescription(path: string): string[] {

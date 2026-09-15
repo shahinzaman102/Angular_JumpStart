@@ -1,0 +1,25 @@
+<div class="slider-header">
+  <span class="label-text">{{ label() }}: <strong>{{ value() }}%</strong></span>
+</div>
+
+<div class="minimal-slider-ui">
+  <div 
+    class="track" 
+    [style.--fill-percent.%]="fillPercentage()"
+    [style.--accent-color]="themeColor()"
+  ></div>
+
+  <button 
+    class="btn-decrease"
+    [class.btn-disabled]="disabled() || value() <= min()"
+    [disabled]="disabled() || value() <= min()"
+    (click)="adjust(-step())"
+  >-</button>
+
+  <button 
+    class="btn-increase"
+    [class.btn-disabled]="disabled() || value() >= max()"
+    [disabled]="disabled() || value() >= max()"
+    (click)="adjust(step())"
+  >+</button>
+</div>

@@ -1,0 +1,49 @@
+<main class="slider-demo-container">
+  <h1>Accessible UI Demo</h1>
+
+  <section aria-labelledby="demo-heading">
+    <h2 id="demo-heading">Custom Accessible Slider with WAI-ARIA Pattern</h2>
+
+    <custom-slider 
+      [value]="volume()" 
+      [min]="20" 
+      [max]="80" 
+      [step]="5"
+      [disabled]="isControlDisabled()"
+      [themeColor]="themeColor()"
+      label="Media Volume"
+      (valueChange)="volume.set($event)"
+    />
+
+    <div class="controls-row">
+      <button 
+        type="button" 
+        [attr.aria-label]="'Toggle Disabled State. Currently ' + (isControlDisabled() ? 'Disabled' : 'Enabled')"
+        (click)="toggleDisabled()"
+      >
+        Toggle Disabled State
+      </button>
+
+      <button 
+        type="button" 
+        [disabled]="isControlDisabled()"
+        [attr.aria-label]="'Toggle Theme Color. Currently ' + (themeColor() === '#1976d2' ? 'Blue' : 'Pink')"
+        (click)="toggleTheme()"
+      >
+        Toggle Theme Color
+      </button>
+    </div>
+
+    <div aria-live="polite" class="sr-only">
+      {{ disabledStatusMessage() }}
+    </div>
+
+    <div aria-live="polite" class="sr-only">
+      {{ themeStatusMessage() }}
+    </div>
+
+    <p class="status-output" aria-live="polite" aria-atomic="true">
+      Active Value: <strong>{{ volume() }}%</strong>
+    </p>
+  </section>
+</main>

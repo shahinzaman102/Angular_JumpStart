@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { AnalyticsWidgetComponent } from '../analytics-widget/analytics-widget';
+import { AnalyticsWidget } from '../analytics-widget/analytics-widget';
 
 /**
  * LifecycleUseCases (Parent / Host Component)
@@ -20,7 +20,7 @@ import { AnalyticsWidgetComponent } from '../analytics-widget/analytics-widget';
  */
 @Component({
   selector: 'app-lifecycle-use-cases',
-  imports: [AnalyticsWidgetComponent],
+  imports: [AnalyticsWidget],
   templateUrl: './lifecycle-use-cases.html',
   styleUrl: './lifecycle-use-cases.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
