@@ -1,69 +1,69 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './guards/auth.guard';
-import { adminChildGuard } from './guards/admin-child.guard';
-import { unsavedChangesGuard } from './guards/unsaved-changes.guard';
-import { featureFlagGuard } from './guards/feature-flag.guard';
+import { authGuard } from './features/route-guards/guards/auth.guard';
+import { adminChildGuard } from './features/route-guards/guards/admin-child.guard';
+import { unsavedChangesGuard } from './features/route-guards/guards/unsaved-changes.guard';
+import { featureFlagGuard } from './features/route-guards/guards/feature-flag.guard';
 
 export const routes: Routes = [
     {
         path: '', 
-        loadComponent: () => import('./home-page/home-page').then(m => m.HomePage),
+        loadComponent: () => import('./features/home/home').then(m => m.Home),
     },
     {
-        path: 'signal-use-cases',
-        loadComponent: () => import('./signal-use-cases/signal-use-cases').then(m => m.SignalUseCases),
+        path: 'signals',
+        loadComponent: () => import('./features/signals/signals').then(m => m.Signals),
     },
     {
-        path: 'rxjs-stream-use-cases',
+        path: 'rxjs-streams',
         loadComponent: () => 
-            import('./rxjs-stream-use-cases/rxjs-stream-use-cases').then(m => m.RxjsStreamUseCases),
+            import('./features/rxjs-streams/rxjs-streams').then(m => m.RxjsStreams),
     },
     {
-        path: 'pipes-use-cases',
-        loadComponent: () => import('./pipes-use-cases/pipes-use-cases').then(m => m.PipesUseCases),
+        path: 'pipes',
+        loadComponent: () => import('./features/pipes/pipes').then(m => m.Pipes),
     },
     {
-        path: 'forms-use-cases',
-        loadComponent: () => import('./forms-use-cases/forms-use-cases').then(m => m.FormsUseCases),
+        path: 'forms',
+        loadComponent: () => import('./features/forms/forms').then(m => m.Forms),
     },
     {
-        path: 'lifecycle-use-cases',
+        path: 'lifecycle',
         loadComponent: () => 
-            import('./lifecycle-use-cases/lifecycle-use-cases').then(m => m.LifecycleUseCases),
+            import('./features/lifecycle/lifecycle').then(m => m.Lifecycle),
     },
     {
         path: 'wai-aria', 
-        loadComponent: () => import('./wai-aria/wai-aria').then(m => m.WaiAria),
+        loadComponent: () => import('./features/wai-aria/wai-aria').then(m => m.WaiAria),
     },
     {
         path: 'no-wai-aria',
-        loadComponent: () => import('./no-wai-aria/no-wai-aria/no-wai-aria').then(m => m.NoWaiAria),
+        loadComponent: () => import('./features/wai-aria/no-wai-aria/no-wai-aria').then(m => m.NoWaiAria),
     },
     
     // --- ROUTE GUARDS DEMO ROUTE (Single Root Entry) ---
     {
-        path: 'route-guards-use-cases',
-        loadComponent: () => import('./route-guards-use-cases/route-guards-use-cases').then(m => m.RouteGuardsUseCases),
+        path: 'route-guards',
+        loadComponent: () => import('./features/route-guards/route-guards').then(m => m.RouteGuards),
         canActivate: [authGuard],
         canDeactivate: [unsavedChangesGuard],
         canActivateChild: [adminChildGuard],
         children: [
             {
                 path: 'child-a',
-                loadComponent: () => import('./route-guards-use-cases/route-guards-use-cases').then(m => m.ChildAComponent)
+                loadComponent: () => import('./features/route-guards/route-guards').then(m => m.ChildAComponent)
             },
             {
                 path: 'child-b',
-                loadComponent: () => import('./route-guards-use-cases/route-guards-use-cases').then(m => m.ChildBComponent)
+                loadComponent: () => import('./features/route-guards/route-guards').then(m => m.ChildBComponent)
             },
             {
                 path: 'feature',
                 canMatch: [featureFlagGuard],
-                loadComponent: () => import('./route-guards-use-cases/route-guards-use-cases').then(m => m.BetaFeatureComponent)
+                loadComponent: () => import('./features/route-guards/route-guards').then(m => m.BetaFeatureComponent)
             },
             {
                 path: 'feature',
-                loadComponent: () => import('./route-guards-use-cases/route-guards-use-cases').then(m => m.StandardFeatureComponent)
+                loadComponent: () => import('./features/route-guards/route-guards').then(m => m.StandardFeatureComponent)
             }
         ]
     },

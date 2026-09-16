@@ -1,0 +1,200 @@
+<h2>Signal Use Cases</h2>
+
+<!-- 1. LOCAL COMPONENT STATE -->
+<section>
+  <h3>1. Local Component State</h3>
+  <input
+    type="text"
+    [value]="message()"
+    (input)="updateMessage($event)"
+    placeholder="Enter message"
+  />
+  
+  <p>Current message: {{ message() }}</p>
+
+  <h4>Counter: {{ count() }}</h4>
+  <button (click)="increment()">Increment</button>
+  <button (click)="decrement()">Decrement</button>
+  <button (click)="resetCount()">Reset</button>
+</section>
+
+<!-- 2. SHARED STATE ACROSS COMPONENTS -->
+<section>
+  <h3>2. Shared State Across Components (Service Signal)</h3>
+  <p>Shared state from service: <strong>{{ sharedMessage() }}</strong></p>
+  <button (click)="shareState()">Share Message with Child</button>
+</section>
+
+<!-- 3. COMPONENT COMMUNICATION -->
+<section>
+  <h3>3. Component Communication (input, output, model)</h3>
+
+  <label>
+    Parent controls model value: 
+    <input
+      type="text"
+      data-testid="parent-model-input"
+      [value]="parentModelValue()"
+      (input)="updateParentModelValue($event)"
+    />
+  </label>
+
+  @if (childMessageLog()) {
+    <p>Notification from child: <em>{{ childMessageLog() }}</em></p>
+  }
+
+  <br /><br />
+
+  <app-signal-child 
+    [parentCounter]="count()" 
+    (childEvent)="handleChildEvent($event)"
+    [(childValue)]="parentModelValue" 
+  />
+</section>
+
+<!-- 4. DERIVED STATE -->
+<section>
+  <h3>4. Derived State</h3>
+  <input
+    type="text"
+    [value]="searchTerm()"
+    (input)="updateSearchTerm($event)"
+    placeholder="Filter products"
+  />
+
+  <p>Total price: <strong>${{ totalPrice() }}</strong></p>
+  <p>Matching products: <strong>{{ filteredProducts().length }}</strong></p>
+
+  @if (hasProducts()) {
+    <ul>
+      @for (product of filteredProducts(); track product.id) {
+        <li>{{ product.title }} — ${{ product.price }}</li>
+      }
+    </ul>
+  } @else {
+    <p>No matching products found.</p>
+  }
+</section>
+
+<!-- 5. REACTIVE SIDE EFFECTS -->
+<section>
+  <h3>5. Reactive Side Effects</h3>
+  <p>Current theme: <strong>{{ theme() }}</strong></p>
+  <button (click)="toggleTheme()">Toggle Theme</button>
+</section>
+
+<!-- 6. ASYNC HTTP STATE MANAGEMENT USING HTTPRESOURCE -->
+<section>
+  <h3>6. Async HTTP State (httpResource)</h3>
+
+  <input
+    type="text"
+    [value]="httpSearchTerm()"
+    (input)="updateHttpSearchTerm($event)"
+    placeholder="Search category..."
+  />
+
+  @if (productsResource.isLoading()) {
+    <p>Loading products...</p>
+  } @else if (productsResource.error()) {
+    <p>Error loading products.</p>
+  } @else {
+    <ul>
+      @for (product of searchedProducts(); track product.id) {
+        <li>{{ product.title }} — ${{ product.price }}</li>
+      } @empty {
+        <li>No products found.</li>
+      }
+    </ul>
+  }
+</section>
+
+<!-- 7. GENERIC ASYNC STATE MANAGEMENT USING RESOURCE -->
+<section>
+  <h3>7. Generic Async State (resource) — SDK / Native Promise</h3>
+
+  <input
+    type="text"
+    [value]="sdkSearchTerm()"
+    (input)="updateSdkSearchTerm($event)"
+    placeholder="Search SDK users..."
+  />
+
+  @if (sdkUserResource.isLoading()) {
+    <p>Loading users from SDK...</p>
+  } @else if (sdkUserResource.error()) {
+    <p>Error loading SDK users.</p>
+  } @else {
+    <ul>
+      @for (user of sdkUserResource.value(); track user.id) {
+        <li>{{ user.name }}</li>
+      } @empty {
+        <li>No users found.</li>
+      }
+    </ul>
+  }
+</section>
+
+<!-- 8. LINKED SIGNALS (Resetting / Writable Derived State) -->
+<section>
+  <h3>8. Linked Signals (linkedSignal)</h3>
+
+  <p>Selected Category: <strong>{{ selectedCategory() }}</strong></p>
+  <button (click)="selectCategory('Electronics')">Select Electronics</button>
+  <button (click)="selectCategory('Clothing')">Select Clothing</button>
+
+  <br /><br />
+
+  <p>Selected Item: <strong>{{ selectedItem() }}</strong></p>
+  <button (click)="setCustomItem('Headphones')">Override Item to "Headphones"</button>
+  <button (click)="setCustomItem('Jacket')">Override Item to "Jacket"</button>
+</section>
+
+<!-- 9. SIGNAL VIEW QUERIES -->
+<section>
+  <h3>9. Signal View Queries (viewChild)</h3>
+
+  <input 
+    #searchInput 
+    type="text" 
+    placeholder="Click button to focus me..." 
+  />
+  <button (click)="focusSearchInput()">Focus Input via viewChild()</button>
+
+  @if (searchInputElement()) {
+    <p>Status: <strong>Element attached to DOM (Signal defined)</strong></p>
+  }
+</section>
+
+<!-- 10. DEFERRED LOADING (@defer) -->
+<section>
+  <h3>10. Deferred Loading (&#64;defer driven by Signal)</h3>
+
+  <button (click)="loadHeavyComponent()">Load Deferred Child Component</button>
+
+  @defer (when showHeavyComponent()) {
+    <app-signal-child 
+      [parentCounter]="count()" 
+      (childEvent)="handleChildEvent($event)"
+      [(childValue)]="parentModelValue" 
+    />
+  } @placeholder {
+    <p>Component not loaded yet (Placeholder state).</p>
+  } @loading (minimum 500ms) {
+    <p>Loading deferred component bundle...</p>
+  }
+</section>
+
+<!-- 11. LAZY-LOADED SERVICE (injectAsync) -->
+<section>
+  <h3>11. Lazy-Loaded Service (injectAsync)</h3>
+  <p>Status: <strong>{{ exportStatus() }}</strong></p>
+
+  <button (click)="exportProducts()" [disabled]="isExporting()">
+    @if (isExporting()) {
+      Exporting…
+    } @else {
+      Export Filtered Products
+    }
+  </button>
+</section>
