@@ -252,9 +252,13 @@ export class SignalUseCases {
   protected async exportProducts(): Promise<void> {
     this.isExporting.set(true);
     try {
-      const service = await this.exportService(); // triggers dynamic import on first call
+      const service = await this.exportService();
       const result = await service.exportData(this.filteredProducts());
       this.exportStatus.set(result);
+    } catch (error: unknown) {
+      // REQUIRED: Handle network import or export failures
+      console.error('Failed to export products:', error);
+      this.exportStatus.set('Export failed. Please try again.');
     } finally {
       this.isExporting.set(false);
     }
