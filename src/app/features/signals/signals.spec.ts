@@ -33,7 +33,6 @@ describe('SignalUseCases', () => {
     fixture = TestBed.createComponent(Signals);
     component = fixture.componentInstance;
 
-    fixture.detectChanges();
     await fixture.whenStable();
   });
 

@@ -1,6 +1,5 @@
 import { CanDeactivateFn } from '@angular/router';
 
-// Interface that target components implement
 export interface HasUnsavedChanges {
     hasUnsavedChanges: () => boolean;
 }

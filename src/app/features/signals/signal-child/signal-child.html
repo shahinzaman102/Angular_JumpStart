@@ -1,11 +1,9 @@
 <div class="bordered">
-  <h4>Child Component</h4>
+  <h4 style="color: blue">Child Component</h4>
 
   <!-- Service-based Shared State -->
   <p>Shared state from service: <strong>{{ sharedMessage() }}</strong></p>
   <button type="button" (click)="clearSharedState()">Clear Shared State</button>
-
-  <hr />
 
   <!-- Component Communication APIs -->
   <p>Received counter from parent via input(): <strong>{{ parentCounter() }}</strong></p>

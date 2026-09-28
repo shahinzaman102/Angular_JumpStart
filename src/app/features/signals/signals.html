@@ -9,7 +9,7 @@
     (input)="updateMessage($event)"
     placeholder="Enter message"
   />
-  
+
   <p>Current message: {{ message() }}</p>
 
   <h4>Counter: {{ count() }}</h4>
@@ -40,10 +40,10 @@
   </label>
 
   @if (childMessageLog()) {
-    <p>Notification from child: <em>{{ childMessageLog() }}</em></p>
+    <p style="color: blue">
+      Notification from child: <em>{{ childMessageLog() }}</em>
+    </p>
   }
-
-  <br /><br />
 
   <app-signal-child 
     [parentCounter]="count()" 

@@ -15,7 +15,6 @@ import {
   SimpleChanges,
   afterNextRender,
   afterEveryRender,
-  ChangeDetectionStrategy,
   effect,
   DestroyRef,
   inject,
@@ -48,7 +47,6 @@ import {
   selector: 'app-analytics-widget',
   templateUrl: './analytics-widget.html',
   styleUrl: './analytics-widget.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnalyticsWidget implements
   OnChanges,

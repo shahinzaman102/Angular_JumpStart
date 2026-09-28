@@ -7,7 +7,7 @@
   </thead>
 
   <tbody>
-    @for (route of routes(); track route.path) {
+    @for (route of routes; track route.path) {
       @if (route.path) {
         <tr>
           <td class="routes-cell">
@@ -29,12 +29,12 @@
 
             <!-- Dynamic Testing Guide Link -->
             @if (getGuideLink(route.path); as guide) {
-              <div class="guide-link-container" style="margin-top: 10px;">
+              <div class="guide-link-container">
                 <a 
+                  class="guide-link"
                   [href]="guide.url" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  style="color: #0066cc; font-size: 0.88rem; text-decoration: underline;"
                 >
                   {{ guide.label }}
                 </a>
@@ -44,8 +44,8 @@
 
           <td class="routes-cell">
             <a
-              [routerLink]="['/', route.path]"
               class="route-link"
+              [routerLink]="['/', route.path]"
             >
               {{ formatTitle(route.path) }}
             </a>

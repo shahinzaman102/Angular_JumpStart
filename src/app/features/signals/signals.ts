@@ -1,8 +1,5 @@
-import { Component, computed, effect, inject, signal, resource, 
-  linkedSignal, viewChild, ElementRef, ChangeDetectionStrategy,
-  injectAsync,
-  onIdle,
-  afterNextRender} from '@angular/core';
+import { Component, computed, effect, inject, signal, resource, linkedSignal, 
+  viewChild, ElementRef, injectAsync, onIdle, afterNextRender} from '@angular/core';
 import { httpResource } from '@angular/common/http';
 import { SignalChild } from './signal-child/signal-child';
 import { SignalState } from '../../core/services/signal-state';
@@ -19,9 +16,6 @@ export interface Product {
   imports: [SignalChild],
   templateUrl: './signals.html',
   styleUrl: './signals.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  // Do NOT set `OnPush` explicitly cause it's the default in Angular v22+.
-  // We've set to provide clarity..
 })
 export class Signals {
   private readonly stateService = inject(SignalState);
@@ -114,7 +108,6 @@ export class Signals {
   protected readonly theme = signal<'light' | 'dark'>('light');
   private isLoaded = false;
 
-  // 1. Keep effect as a field initializer (has Injection Context)
   private readonly _themeLogger = effect(() => {
     const currentTheme = this.theme();
 

@@ -138,8 +138,9 @@
   </section>
 
   <!-- ================================================================ -->
-  <!-- 3) SIGNAL FORMS (experimental)                                    -->
+  <!-- 3) SIGNAL FORMS (experimental)                                   -->
   <!-- ================================================================ -->
+  <!-- Defer Signal Forms section to client-side render only, avoiding the same SSR/hydration mismatch. -->
   @defer (on immediate) {
     <section class="form-section">
       <h2>3. Signal Forms (Experimental)</h2>

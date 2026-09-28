@@ -1,7 +1,8 @@
 <div>
-  <h2>Built-in Pipes (E-Commerce Order Summary)</h2>
+  <h1>Built-in Pipes (E-Commerce Order Summary)</h1>
   
   <div>
+    <h3>Basic pipes (Order Metadata):</h3>
     <p><strong>Order ID:</strong> {{ order().id }}</p>
     <p><strong>Customer:</strong> {{ order().customer | titlecase }}</p>
     <p><strong>Created:</strong> {{ order().createdAt | date:'medium' }}</p>
@@ -9,17 +10,17 @@
     <p><strong>Applied Discount:</strong> {{ order().discount | percent:'1.0-0' }}</p>
   </div>
 
-  <h3>Order Metadata (KeyValuePipe & JsonPipe)</h3>
+  <h3>KeyValuePipe (Order Metadata):</h3>
   <ul>
     @for (item of order().metadata | keyvalue; track item.key) {
       <li><strong>{{ item.key | titlecase }}:</strong> {{ item.value }}</li>
     }
   </ul>
 
-  <h3>Raw Payload Preview (JsonPipe)</h3>
+  <h3>JsonPipe (Raw Payload Preview):</h3>
   <pre>{{ order() | json }}</pre>
 
-  <h3>AsyncPipe (Real-time Dashboard Metrics)</h3>
+  <h3>AsyncPipe (Real-time Dashboard Metrics):</h3>
   @if (serverStatus$ | async; as status) {
     <div>
       <p><strong>Status:</strong> {{ status.online ? 'Online' : 'Offline' }}</p>
@@ -32,7 +33,7 @@
 
   <hr />
 
-  <h2>Custom Pipes (File Downloads & Relative Time)</h2>
+  <h1>Custom Pipes (File Downloads & Relative Time)</h1>
   <table>
     <thead>
       <tr>

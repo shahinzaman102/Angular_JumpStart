@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
 export interface RouteGuideLink {
@@ -12,6 +12,8 @@ export interface RouteGuideLink {
   templateUrl: './home.html',
   styleUrl: './home.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  // Do NOT set `OnPush` explicitly cause it's the default in Angular v22+.
+  // We've set to provide clarity..
 })
 export class Home {
   private readonly router = inject(Router);
@@ -19,20 +21,20 @@ export class Home {
   private readonly titles: Record<string, string> = {
     'signals': 'Signals',
     'rxjs-streams': 'RxJS',
-    'pipes': 'Pipes',
-    'forms': 'Forms',
     'lifecycle': 'Lifecycle',
     'route-guards': 'Route Guards',
+    'pipes': 'Pipes',
+    'forms': 'Forms',
     'wai-aria': 'WAI-ARIA'
   };
 
   private readonly useCaseLabels: Record<string, string> = {
     'signals': 'Use Cases (handles state):',
     'rxjs-streams': 'Use Cases (handles event streams):',
-    'pipes': 'Use Cases (handles data transformation):',
-    'forms': 'Use Cases (handles user input):',
     'lifecycle': 'Use Cases (handles component setup/teardown):',
     'route-guards': 'Use Cases (handles navigation & access control):',
+    'pipes': 'Use Cases (handles data transformation):',
+    'forms': 'Use Cases (handles user input):',
     'wai-aria': 'Use Cases (handles UI accessibility & ARIA bindings):'
   };
 
@@ -62,18 +64,6 @@ export class Home {
       Time-Based Streams
       Stream Cancellation`,
 
-    'pipes': `
-      Formatting & Display
-      Object & Data Inspection
-      Asynchronous Data
-      File Size Formatting
-      Relative Time Display`,
-
-    'forms': `
-      Simple Forms
-      Complex & Dynamic Forms
-      Signal-Based Forms(Experimental)`,
-
     'lifecycle': `
       Construction & Injection Context
       Input Change Tracking
@@ -87,6 +77,18 @@ export class Home {
       CanDeactivate (Unsaved Changes Warning)
       CanMatch (Dynamic Feature Flag Routing)`,
 
+    'pipes': `
+      Formatting & Display
+      Object & Data Inspection
+      Asynchronous Data
+      File Size Formatting
+      Relative Time Display`,
+
+    'forms': `
+      Simple Forms
+      Complex & Dynamic Forms
+      Signal-Based Forms(Experimental)`,
+
     'wai-aria': `
       Custom WAI-ARIA Slider Pattern
       Signal-Driven Host Style & Attribute Bindings
@@ -95,7 +97,9 @@ export class Home {
       Keyboard Navigation & Focus Management`
   };
 
-  protected readonly routes = computed(() => {
+  protected readonly routes = this.getFilteredAndSortedRoutes();
+
+  private getFilteredAndSortedRoutes() {
     const targetOrder = Object.keys(this.titles);
 
     return this.router.config
@@ -115,7 +119,7 @@ export class Home {
 
         return indexA - indexB;
       });
-  });
+  }
 
   protected formatTitle(path: string): string {
     return (

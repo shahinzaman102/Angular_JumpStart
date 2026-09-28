@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { AnalyticsWidget } from './analytics-widget/analytics-widget';
 
 
@@ -24,7 +24,6 @@ import { AnalyticsWidget } from './analytics-widget/analytics-widget';
   imports: [AnalyticsWidget],
   templateUrl: './lifecycle.html',
   styleUrl: './lifecycle.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Lifecycle {
   // Controls whether <app-analytics-widget> is present in the DOM.

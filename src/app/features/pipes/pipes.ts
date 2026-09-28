@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { AsyncPipe, CurrencyPipe, DatePipe, DecimalPipe, 
   JsonPipe, KeyValuePipe, PercentPipe, TitleCasePipe } from '@angular/common';
 import { Observable, timer, of } from 'rxjs';
@@ -39,12 +39,9 @@ interface ServerStatus {
   ],
   templateUrl: './pipes.html',
   styleUrl: './pipes.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  // Do NOT set `OnPush` explicitly cause it's the default in Angular v22+.
-  // We've set to provide clarity..
 })
 export class Pipes {
-  // Practical Built-In Pipe Data
+  // Built-In Pipe Data
   protected readonly order = signal<OrderSummary>({
     id: 'ORD-8921',
     customer: 'john doe',
@@ -58,7 +55,7 @@ export class Pipes {
     },
   });
 
-  // Practical AsyncPipe Example: Live Server Status Polling
+  // AsyncPipe Example: Live Server Status Polling
   protected readonly serverStatus$: Observable<ServerStatus> = timer(0, 5000).pipe(
     map((tick) => ({
       online: true,
@@ -68,7 +65,7 @@ export class Pipes {
     catchError(() => of({ online: false, activeUsers: 0, uptimeSeconds: 0 }))
   );
 
-  // Practical Custom Pipe Data
+  // Custom Pipe Data
   protected readonly downloads = signal([
     { name: 'Angular_v22_CheatSheet.pdf', bytes: 2450821, uploadedAt: new Date(Date.now() - 1000 * 60 * 12) },
     { name: 'Architecture_Diagram.png', bytes: 842100, uploadedAt: new Date(Date.now() - 1000 * 3600 * 5) },

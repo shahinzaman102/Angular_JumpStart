@@ -19,34 +19,16 @@ export const routes: Routes = [
             import('./features/rxjs-streams/rxjs-streams').then(m => m.RxjsStreams),
     },
     {
-        path: 'pipes',
-        loadComponent: () => import('./features/pipes/pipes').then(m => m.Pipes),
-    },
-    {
-        path: 'forms',
-        loadComponent: () => import('./features/forms/forms').then(m => m.Forms),
-    },
-    {
         path: 'lifecycle',
-        loadComponent: () => 
+        loadComponent: () =>
             import('./features/lifecycle/lifecycle').then(m => m.Lifecycle),
     },
-    {
-        path: 'wai-aria', 
-        loadComponent: () => import('./features/wai-aria/wai-aria').then(m => m.WaiAria),
-    },
-    {
-        path: 'no-wai-aria',
-        loadComponent: () => import('./features/wai-aria/no-wai-aria/no-wai-aria').then(m => m.NoWaiAria),
-    },
-    
-    // --- ROUTE GUARDS DEMO ROUTE (Single Root Entry) ---
     {
         path: 'route-guards',
         loadComponent: () => import('./features/route-guards/route-guards').then(m => m.RouteGuards),
         canActivate: [authGuard],
-        canDeactivate: [unsavedChangesGuard],
         canActivateChild: [adminChildGuard],
+        canDeactivate: [unsavedChangesGuard],
         children: [
             {
                 path: 'child-a',
@@ -67,7 +49,22 @@ export const routes: Routes = [
             }
         ]
     },
-
+    {
+        path: 'pipes',
+        loadComponent: () => import('./features/pipes/pipes').then(m => m.Pipes),
+    },
+    {
+        path: 'forms',
+        loadComponent: () => import('./features/forms/forms').then(m => m.Forms),
+    },
+    {
+        path: 'wai-aria', 
+        loadComponent: () => import('./features/wai-aria/wai-aria').then(m => m.WaiAria),
+    },
+    {
+        path: 'no-wai-aria',
+        loadComponent: () => import('./features/wai-aria/no-wai-aria/no-wai-aria').then(m => m.NoWaiAria),
+    },
     {
         path: '**',
         redirectTo: ''

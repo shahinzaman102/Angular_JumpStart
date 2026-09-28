@@ -1,6 +1,5 @@
 import { Component, signal } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { HasUnsavedChanges } from './guards/unsaved-changes.guard';
 
 @Component({
   selector: 'app-route-guards',
@@ -8,13 +7,12 @@ import { HasUnsavedChanges } from './guards/unsaved-changes.guard';
   styleUrl: './route-guards.css',
   templateUrl: './route-guards.html',
 })
-export class RouteGuards implements HasUnsavedChanges {
+export class RouteGuards {
   isLoggedIn = signal(localStorage.getItem('isLoggedIn') === 'true');
   isAdmin = signal(localStorage.getItem('userRole') === 'admin');
   betaFeature = signal(localStorage.getItem('betaFeature') === 'true');
   dirtyForm = signal(false);
 
-  // Implementation required by CanDeactivate interface
   hasUnsavedChanges(): boolean {
     return this.dirtyForm();
   }
@@ -64,5 +62,5 @@ export class StandardFeatureComponent { }
 In Code(TypeScript & Component Hierarchy):
 - They are Not child components: They are simply separate class definitions in the same file.
 - To be a direct nestable child component in template terms, RouteGuardsUseCases would need to 
-  import them in its @Component.imports array and use them directly in its HTML(e.g., <app-child - a > </app-child>).
+  import them in its @Component.imports array and use them directly in its HTML.
 */

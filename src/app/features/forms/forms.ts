@@ -1,20 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { AbstractControl, AsyncValidatorFn, FormBuilder,
-  ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-
-// --- Signal Forms (experimental, @angular/forms/signals) ---
-// NOTE: This API is experimental and can change without notice between
-// Angular versions. If `form`/`FormField` imports below fail to resolve,
-// check that:
-//   1. Your Angular version is 21+ (signal forms shipped experimentally here)
-//   2. The package `@angular/forms/signals` is present in node_modules
-// If it's not available in your app yet, you can comment out the
-// "Signal Forms" section (marked below) and the other two demos still work.
+import {
+  AbstractControl, AsyncValidatorFn, FormBuilder,
+  ReactiveFormsModule, ValidationErrors, Validators
+} from '@angular/forms';
 import { form, FormField, required, minLength } from '@angular/forms/signals';
 
-// Strongly-typed shape of the reactive "IoT device config" form, so every
-// .get(...) call below is typed instead of falling back to `any`.
 interface DeviceConfigForm {
   deviceId: string;
   sensorType: 'temperature' | 'gps' | 'humidity';
@@ -31,7 +22,7 @@ interface DeviceConfigForm {
   imports: [FormsModule, ReactiveFormsModule, FormField],
   templateUrl: './forms.html',
   styleUrl: './forms.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // Signal Forms currently has SSR/hydration mismatches; skip hydration for this component as a workaround.
   host: { 'ngSkipHydration': 'true' }
 })
 export class Forms {
@@ -89,7 +80,6 @@ export class Forms {
   }
 
   private updateConditionalValidators(sensorType: DeviceConfigForm['sensorType']): void {
-
     this.deviceForm.controls.minMaxC.disable({ emitEvent: false });
     this.deviceForm.controls.locationInterval.disable({ emitEvent: false });
     this.deviceForm.controls.humidityThreshold.disable({ emitEvent: false });
@@ -121,7 +111,8 @@ export class Forms {
 
   onReactiveSubmit(): void {
     if (this.deviceForm.valid) {
-      this.reactiveSubmitResult = JSON.stringify(this.deviceForm.getRawValue(), null, 2);
+      // Angular's .value property automatically excludes disabled controls!
+      this.reactiveSubmitResult = JSON.stringify(this.deviceForm.value, null, 2);
     }
   }
 

@@ -1,13 +1,10 @@
-import { ChangeDetectionStrategy, Component, inject, input, output, model } from '@angular/core';
+import { Component, inject, input, output, model } from '@angular/core';
 import { SignalState } from '../../../core/services/signal-state';
 
 @Component({
   selector: 'app-signal-child',
   templateUrl: './signal-child.html',
   styleUrl: './signal-child.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  // Do NOT set `OnPush` explicitly cause it's the default in Angular v22+.
-  // We've set to provide clarity..
 })
 
 export class SignalChild {

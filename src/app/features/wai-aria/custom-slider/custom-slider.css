@@ -1,7 +1,7 @@
 :host {
   --border-color: #8c8c8c;
   --track-bg: #e6e6e6;
-  --track-fill: var(--accent-color, #1976d2);
+  --track-fill: var(--accent-color, #1976d2); /* Uses --accent-color if defined; falls back to blue (#1976d2) */
   --focus-ring-color: #808080;
 
   display: block;
@@ -54,8 +54,8 @@
   border: 1px solid var(--border-color);
   background: linear-gradient(
     to right,
-    var(--track-fill) var(--fill-percent),
-    var(--track-bg) var(--fill-percent)
+    var(--track-fill) var(--fill-percent), /* Color 1 implicitly starts at 0% and ends at --fill-percent */
+    var(--track-bg) var(--fill-percent)   /* Color 2 starts at --fill-percent and implicitly ends at 100% */
   );
 }
 
