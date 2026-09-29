@@ -17,7 +17,7 @@
   <button 
     type="button" 
     [attr.aria-label]="'Decrease ' + label()"
-    [class.btn-disabled]="disabled() || value() <= min()"
+    [class.at-boundary]="value() <= min()"
     [disabled]="disabled() || value() <= min()"
     (click)="adjust(-step())"
   >-</button>
@@ -25,7 +25,7 @@
   <button 
     type="button" 
     [attr.aria-label]="'Increase ' + label()"
-    [class.btn-disabled]="disabled() || value() >= max()"
+    [class.at-boundary]="value() >= max()"
     [disabled]="disabled() || value() >= max()"
     (click)="adjust(step())"
   >+</button>

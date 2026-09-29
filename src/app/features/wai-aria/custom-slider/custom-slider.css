@@ -82,11 +82,14 @@ button:focus-visible,
   box-shadow: 0 0 0 3px var(--focus-ring-color);
 }
 
-button.btn-disabled,
 button:disabled {
   opacity: 0.45;
   cursor: not-allowed;
   border-color: var(--border-color);
+}
+
+.at-boundary {
+  border-style: dashed;
 }
 
 button:hover:not(:disabled) {

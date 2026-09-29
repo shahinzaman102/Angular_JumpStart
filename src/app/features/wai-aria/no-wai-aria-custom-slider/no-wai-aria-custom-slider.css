@@ -49,11 +49,14 @@ button {
 .btn-decrease { order: -1; }
 .btn-increase { order: 1; }
 
-button.btn-disabled,
 button:disabled {
   opacity: 0.45;
   cursor: not-allowed;
   border-color: #8c8c8c;
+}
+
+.at-boundary {
+  border-style: dashed;
 }
 
 button:hover:not(:disabled) {
