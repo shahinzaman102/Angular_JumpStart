@@ -6,17 +6,17 @@
 }
 
 .routes-header {
-  border: 2px solid crimson;
+  border: 2px solid #ff006e;
   padding: 10px;
   font-size: 1.5rem;
   font-weight: bold;
-  color: crimson;
+  color: #ff006e;
   background-color: transparent;
   width: 50%;
 }
 
 .routes-cell {
-  border: 1px solid crimson;
+  border: 1px solid #ff006e;
   padding: 10px;
   width: 50%;
   white-space: normal;
@@ -50,7 +50,7 @@
 }
 
 .route-link:hover {
-  color: crimson;
+  color: #ff006e;
 }
 
 .guide-link-container {
